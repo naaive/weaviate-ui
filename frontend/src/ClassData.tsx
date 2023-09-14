@@ -1,21 +1,24 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {getClass} from "./api.ts";
-import {ProTable} from "@ant-design/pro-components";
+import {ActionType, ProTable} from "@ant-design/pro-components";
 
 export default function ({pathname, propties}: any) {
     let propertyNames = propties.map(x => x.name);
     const [keyword, setKeyword] = useState("none")
     const [clzData, setClzData] = useState([])
+    const [total, setTotal] = useState(0)
+
     useEffect(() => {
 
-            getClass(pathname, 0, 10, keyword, propertyNames).then(({data}) => {
+            getClass(pathname, 0, 20, keyword, propertyNames).then(({data, count}) => {
                 setClzData(data)
+                setTotal(count)
             })
         }
-        , [pathname,keyword]
+        , [pathname, keyword]
     )
     let columns = [];
-    columns.push( {
+    columns.push({
         title: 'Id',
         dataIndex: 'index',
         width: 48,
@@ -38,16 +41,20 @@ export default function ({pathname, propties}: any) {
         res['key'] = Math.random();
         return res;
     });
+    const ref = useRef<ActionType>();
     return <div>
         <ProTable
+            actionRef={ref}
+            params={{pathname:pathname}}
             columns={columns}
-            dataSource={data}
+            // dataSource={data}
             request={async (
                 // 第一个参数 params 查询表单和 params 参数的结合
                 // 第一个参数中一定会有 pageSize 和  current ，这两个参数是 antd 的规范
                 params: {
                     pageSize: number;
                     current: number;
+                    keyword: string;
                 },
                 sort,
                 filter,
@@ -65,6 +72,7 @@ export default function ({pathname, propties}: any) {
                     res['key'] = Math.random();
                     return res;
                 });
+                console.log(clzData)
                 return {
                     data: data,
                     success: true,
@@ -77,8 +85,9 @@ export default function ({pathname, propties}: any) {
                 title: 'Class',
                 tooltip: '',
                 search: {
-                    onSearch:async (value: string) => {
+                    onSearch: async (value: string) => {
                         setKeyword(value)
+                        ref.current?.reload()
 
                     },
                 },

@@ -1,4 +1,5 @@
-let host = "";
+let host = ""
+// let host = "http://localhost:7777"
 
 export const getSchema = () => {
     return fetch(host + "/schema")
