@@ -44,7 +44,7 @@ export default function () {
             title: 'Detail',
             dataIndex: 'detail',
             render: (_, record) => {
-                return <ReactJson src={record} collapsed={0} enableClipboard={false} displayDataTypes={false}/>
+                return <ReactJson src={record.detail} collapsed={0} enableClipboard={false} displayDataTypes={false}/>
             }
         }
 
