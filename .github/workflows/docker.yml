@@ -1,4 +1,4 @@
-name: Build and Push Docker Image
+name: Build Stable Docker Image
 
 on:
   push:
@@ -24,4 +24,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: naaive/weaviate-ui:v1.0.0
+        tags: naaive/weaviate-ui:v1.0.1

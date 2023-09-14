@@ -3,7 +3,6 @@ import {getClass} from "./api.ts";
 import {ProTable} from "@ant-design/pro-components";
 
 export default function ({pathname, propties}: any) {
-    console.log(pathname, propties)
     let propertyNames = propties.map(x => x.name);
     const [keyword, setKeyword] = useState("none")
     const [clzData, setClzData] = useState([])
