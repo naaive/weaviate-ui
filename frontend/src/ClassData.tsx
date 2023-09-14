@@ -51,11 +51,7 @@ export default function ({pathname, propties}: any) {
             request={async (
                 // 第一个参数 params 查询表单和 params 参数的结合
                 // 第一个参数中一定会有 pageSize 和  current ，这两个参数是 antd 的规范
-                params: {
-                    pageSize: number;
-                    current: number;
-                    keyword: string;
-                },
+                params: any,
                 sort,
                 filter,
             ) => {
