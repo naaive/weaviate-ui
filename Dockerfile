@@ -5,7 +5,7 @@ WORKDIR /app/frontend
 
 RUN yarn
 RUN yarn build
-
+RUN rm -rf node_modules
 WORKDIR /app
 
 COPY . .

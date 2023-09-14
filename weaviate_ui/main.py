@@ -18,9 +18,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+WEAVIATE_API_KEYS = os.getenv("WEAVIATE_API_KEYS", None)
 client = weaviate.Client(
     url=os.getenv("WEAVIATE_URL"),
-    auth_client_secret=weaviate.AuthApiKey(api_key=os.getenv("WEAVIATE_API_KEYS")),
+    auth_client_secret=weaviate.AuthApiKey(api_key=WEAVIATE_API_KEYS) if WEAVIATE_API_KEYS else None,
 )
 
 
@@ -30,10 +31,10 @@ def schema() :
 
 
 @app.post("/class/{class_name}/{offset}/{limit}/{keyword}")
-def class0(class_name: str, offset: int, limit: int, keyword: str='', properties: list[str] = None):
+def class0(class_name: str, offset: int, limit: int, keyword: str = '', properties: list[str] = None) :
     builder = client.query.get(class_name, properties)
     logger.info(keyword)
-    if keyword != "none":
+    if keyword != "none" :
         builder = builder.with_near_text({"concepts" : [keyword]})
     do = builder.with_additional(
         "id").with_offset(offset).with_limit(limit).do()
@@ -45,4 +46,6 @@ def class0(class_name: str, offset: int, limit: int, keyword: str='', properties
             class_name),
         'count' : count
     }
-app.mount("/", StaticFiles(directory="static",html=True), name="static")
+
+
+app.mount("/", StaticFiles(directory="static", html=True), name="static")

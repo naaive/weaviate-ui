@@ -7,8 +7,8 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "7788:7788"
+      - "7777:7777"
     environment:
-        - WEAVIATE_URL=http://localhost:8091
-        - WEAVIATE_API_KEYS=secret
-        - WEAVIATE_USERS=admin
+      - WEAVIATE_URL=http://localhost:8091
+      - WEAVIATE_API_KEYS=secret
+      - WEAVIATE_USERS=admin
