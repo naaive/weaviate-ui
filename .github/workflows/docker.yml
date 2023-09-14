@@ -24,4 +24,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: your-dockerhub-username/your-repo-name:latest
+        tags: loveship00/weaviate-ui:latest
