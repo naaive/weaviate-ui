@@ -1,15 +1,16 @@
 FROM node:18 as builder
 WORKDIR /app
 COPY ./frontend .
-WORKDIR /app/frontend
 
 RUN yarn
 RUN yarn build
-RUN rm -rf node_modules
+
+FROM python:3.11-slim-buster
 WORKDIR /app
 
+COPY --from=builder /app/dist /app/static
+
 COPY . .
-FROM python:3.11-slim-buster
 
 RUN pip install poetry
 COPY poetry.lock pyproject.toml ./
