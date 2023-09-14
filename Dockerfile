@@ -15,4 +15,5 @@ RUN pip install poetry
 COPY poetry.lock pyproject.toml ./
 RUN poetry config virtualenvs.create false && poetry install --no-interaction --no-ansi
 COPY . .
-CMD ["python", "-u", "main.py"]
+CMD ["uvicorn", "weaviate_ui.main:app", "--host", "0.0.0.0", "--port", "7777"]
+

@@ -2,7 +2,6 @@ version: '3.8'
 
 services:
   myapp:
-    network_mode: host
     build:
       context: .
       dockerfile: Dockerfile
@@ -12,3 +11,4 @@ services:
       - WEAVIATE_URL=http://localhost:8091
       - WEAVIATE_API_KEYS=secret
       - WEAVIATE_USERS=admin
+# apt update -y && apt install curl -y
