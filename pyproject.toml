@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "weaviate-ui"
+version = "0.1.0"
+description = ""
+authors = ["Thomas <wxy_000000@qq.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.103.1"
+toolz = "^0.12.0"
+loguru = "^0.7.2"
+weaviate-client = "^3.24.1"
+python-dotenv = "^1.0.0"
+uvicorn = "^0.23.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
